@@ -56,6 +56,7 @@ const deleteCheck = (event) => {
     if (item.classList[0] === 'trash-btn') {
         //Ani
         item.parentElement.classList.add('fall')
+        removeLocalTodos(item.parentElement)
 
         item.parentElement.addEventListener('transitionend', () => {
             item.parentElement.remove()
@@ -106,7 +107,7 @@ const saveLocalTodos = (todo) => {
 
 
 const getTodos = () => {
-    console.log('hello')
+
     let todos
     if (localStorage.getItem('todos') === null) {
         todos = []
@@ -137,6 +138,19 @@ const getTodos = () => {
         todoList.appendChild(todoDiv)
     })
 
+}
+
+const removeLocalTodos = (todo) => {
+    let todos
+    if (localStorage.getItem('todos') === null) {
+        todos = []
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'))
+    }
+    console.log(todo.children[0].innerText)
+    const todoIndex = todo.children[0].innerText
+    todos.splice(todos.indexOf(todoIndex), 1)
+    localStorage.setItem('todos', JSON.stringify(todos))
 }
 
 
