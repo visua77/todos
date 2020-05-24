@@ -156,12 +156,13 @@ select {
     color: green;
     cursor: pointer;
     width: 15rem;
-    padding: 1rem;
-    font-size: 1.5rem;
+    padding: .8rem;
+    font-size: 1.3rem;
 }
 
 .select::after {
     content: "\25BC";
+    font-size: 1.5rem;
     position: absolute;
     background: green;
     top: -5px;
@@ -173,6 +174,7 @@ select {
 
 .select:hover::after {
     content: "\25BC";
+    font-size: 1.5rem;
     position: absolute;
     background: yellow;
     color: green;
