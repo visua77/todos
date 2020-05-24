@@ -19,6 +19,8 @@ const addTodo = (event) => {
         newTodo.innerText = todoInput.value
         newTodo.classList.add('todo-item')
         todoDiv.appendChild(newTodo)
+            //Set localstorage
+        saveLocalTodos(todoInput.value)
             //Completed button
         const completeBtn = document.createElement('button')
         completeBtn.innerHTML = '<i class="fas fa-check"></i>'
@@ -91,9 +93,56 @@ const filterTodos = (event => {
     })
 })
 
+const saveLocalTodos = (todo) => {
+    let todos
+    if (localStorage.getItem('todos') === null) {
+        todos = []
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'))
+    }
+    todos.push(todo)
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+
+const getTodos = () => {
+    console.log('hello')
+    let todos
+    if (localStorage.getItem('todos') === null) {
+        todos = []
+    } else {
+        todos = JSON.parse(localStorage.getItem('todos'))
+    }
+
+
+    todos.forEach((todo) => {
+        const todoDiv = document.createElement('div')
+        todoDiv.classList.add('todo')
+            //Li
+        const newTodo = document.createElement('li')
+        newTodo.innerText = todo
+        newTodo.classList.add('todo-item')
+        todoDiv.appendChild(newTodo)
+            //Completed button
+        const completeBtn = document.createElement('button')
+        completeBtn.innerHTML = '<i class="fas fa-check"></i>'
+        completeBtn.classList.add('complete-btn')
+        todoDiv.appendChild(completeBtn)
+            //Trash button
+        const trashBtn = document.createElement('button')
+        trashBtn.innerHTML = '<i class="fas fa-trash"></i>'
+        trashBtn.classList.add('trash-btn')
+        todoDiv.appendChild(trashBtn)
+            //Append to list
+        todoList.appendChild(todoDiv)
+    })
+
+}
+
 
 //Events
 
+document.addEventListener('DOMContentLoaded', getTodos)
 todoButton.addEventListener('click', addTodo)
 todoList.addEventListener('click', deleteCheck)
 filterOption.addEventListener('change', filterTodos)
