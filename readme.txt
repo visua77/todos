@@ -1,0 +1,1 @@
+Your usual suspect the "todo-app" but made in vanilla.js and saving to localstorage
